@@ -1,0 +1,72 @@
+{
+  "name": "ServiceBooking",
+  "type": "object",
+  "properties": {
+    "provider_id": {
+      "type": "string",
+      "description": "ID of the service provider"
+    },
+    "provider_name": {
+      "type": "string",
+      "description": "Name of the provider"
+    },
+    "provider_category": {
+      "type": "string",
+      "description": "Category of the service"
+    },
+    "client_email": {
+      "type": "string",
+      "description": "Email of the client who booked"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Name of the client"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the service"
+    },
+    "time": {
+      "type": "string",
+      "description": "Preferred time"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the job needed"
+    },
+    "estimated_hours": {
+      "type": "number",
+      "description": "Estimated hours for the job"
+    },
+    "total_cost": {
+      "type": "number",
+      "description": "Total estimated cost including platform fee"
+    },
+    "platform_fee": {
+      "type": "number",
+      "description": "Platform service fee"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "in_progress",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Booking status"
+    },
+    "address": {
+      "type": "string",
+      "description": "Service location address"
+    }
+  },
+  "required": [
+    "provider_id",
+    "provider_name",
+    "date"
+  ]
+}
