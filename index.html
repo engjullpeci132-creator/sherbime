@@ -1,182 +1,157 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Shërbime 😂</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fraunces:wght@700;800&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #120d24;
-  --bg2: #1f1838;
-  --lime: #c8ff4d;
-  --pink: #ff4dff;
-  --yellow: #ffe94d;
-  --cyan: #4dffff;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shërbime 😂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c8ff4d">
+  <style>
+    :root {
+      --bg: #120d24;
+      --lime: #c8ff4d;
+      --pink: #ff4dff;
+      --yellow: #ffe94d;
+      --cyan: #4dffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: linear-gradient(180deg, #1f1838, #120d24);
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+    }
+    .app-shell {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--bg);
+    }
+    .screen { display: none; flex-direction: column; min-height: 100vh; }
+    .screen.active { display: flex; }
+    .scroll-area { flex: 1; overflow-y: auto; padding-bottom: 90px; }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: linear-gradient(180deg, #1f1838, #120d24);
-  color: white;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+    /* HEADER */
+    .home-header { padding: 40px 20px 20px; text-align: center; }
+    .home-greeting { font-size: 17px; color: var(--yellow); font-weight: 800; letter-spacing: 4px; }
+    .home-title {
+      font-family: 'Comic Neue', cursive;
+      font-size: 42px;
+      line-height: 1.05;
+      text-shadow: 6px 6px 0 #ff4dff;
+      margin: 10px 0;
+    }
 
-.app-shell {
-  max-width: 430px;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: var(--bg);
-  position: relative;
-  box-shadow: 0 0 40px rgba(200,255,77,0.3);
-}
+    /* SEARCH */
+    .search-bar {
+      margin: 10px 20px;
+      background: #2a1f4d;
+      border: 5px solid var(--lime);
+      border-radius: 9999px;
+      padding: 18px 24px;
+      font-size: 17px;
+      box-shadow: 0 10px 0 #ff4dff;
+      cursor: pointer;
+    }
 
-.screen { display: none; flex-direction: column; min-height: 100vh; }
-.screen.active { display: flex; }
+    /* CATEGORIES - FIXED SLIDING */
+    .cat-scroll {
+      display: flex;
+      gap: 14px;
+      padding: 0 20px 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .cat-scroll::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      flex-shrink: 0;
+      background: #2a1f4d;
+      border: 4px solid var(--cyan);
+      border-radius: 9999px;
+      padding: 14px 24px;
+      font-weight: 800;
+      font-size: 16px;
+      white-space: nowrap;
+      box-shadow: 0 8px 0 #ff4dff;
+      scroll-snap-align: start;
+      min-width: 130px;
+      text-align: center;
+    }
 
-.scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  padding-bottom: 100px;
-  -webkit-overflow-scrolling: touch;
-}
+    /* FEATURED CARDS */
+    .featured-scroll {
+      display: flex;
+      gap: 16px;
+      padding: 0 20px 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .feat-card {
+      flex-shrink: 0;
+      width: 170px;
+      background: linear-gradient(145deg, #2a1f4d, #1f1838);
+      border: 5px solid var(--lime);
+      border-radius: 24px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 12px 0 #ff4dff;
+      cursor: pointer;
+    }
+    .feat-card:active { transform: scale(0.9) rotate(3deg); }
 
-/* Fun Styles */
-.home-header { padding: 40px 20px 20px; text-align: center; }
-.home-greeting { 
-  font-size: 17px; 
-  color: var(--yellow); 
-  font-weight: 800; 
-  letter-spacing: 4px; 
-}
-.home-title {
-  font-family: 'Comic Neue', cursive;
-  font-size: 42px;
-  line-height: 1.05;
-  font-weight: 800;
-  text-shadow: 6px 6px 0 #ff4dff;
-  margin: 12px 0;
-}
+    /* PROMO */
+    .promo-card {
+      margin: 20px;
+      background: linear-gradient(135deg, #ff4dff, #c8ff4d);
+      color: black;
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 15px 0 #ffe94d;
+    }
 
-.search-bar {
-  margin: 0 20px 20px;
-  background: #2a1f4d;
-  border: 5px solid var(--lime);
-  border-radius: 9999px;
-  padding: 18px 24px;
-  font-size: 17px;
-  box-shadow: 0 10px 0 #ff4dff;
-  cursor: pointer;
-}
-
-.cat-scroll, .featured-scroll {
-  display: flex;
-  gap: 16px;
-  padding: 0 20px 20px;
-  overflow-x: auto;
-}
-.cat-scroll::-webkit-scrollbar, .featured-scroll::-webkit-scrollbar { display: none; }
-
-.cat-pill {
-  flex-shrink: 0;
-  background: #2a1f4d;
-  border: 4px solid var(--cyan);
-  border-radius: 9999px;
-  padding: 14px 22px;
-  font-weight: 800;
-  font-size: 16px;
-  box-shadow: 0 8px 0 #ff4dff;
-}
-
-.feat-card {
-  width: 190px;
-  flex-shrink: 0;
-  background: linear-gradient(145deg, #2a1f4d, #1f1838);
-  border: 5px solid var(--lime);
-  border-radius: 28px;
-  padding: 12px;
-  text-align: center;
-  box-shadow: 0 12px 0 #ff4dff;
-  cursor: pointer;
-}
-.feat-card:active {
-  transform: scale(0.88) rotate(4deg);
-}
-
-.promo-card {
-  margin: 20px;
-  background: linear-gradient(135deg, #ff4dff, #c8ff4d);
-  color: black;
-  border-radius: 28px;
-  padding: 28px 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  font-weight: 900;
-  box-shadow: 0 15px 0 #ffe94d;
-}
-
-.book-btn {
-  background: linear-gradient(90deg, #c8ff4d, #ff4dff);
-  color: #120d24;
-  font-size: 19px;
-  font-weight: 900;
-  padding: 20px;
-  border: none;
-  border-radius: 9999px;
-  box-shadow: 0 12px 0 #ffe94d;
-  width: 90%;
-  margin: 20px auto;
-  display: block;
-}
-.book-btn:active {
-  transform: translateY(8px);
-  box-shadow: 0 4px 0 #ffe94d;
-}
-
-.nav-bar {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 430px;
-  background: rgba(31,24,56,0.98);
-  border-top: 4px solid var(--lime);
-  display: flex;
-  padding: 10px 0 22px;
-}
-.nav-item {
-  flex: 1;
-  text-align: center;
-  cursor: pointer;
-}
-.nav-icon {
-  font-size: 30px;
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 4px;
-  background: #2a1f4d;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 4px solid var(--pink);
-}
-.nav-item.active .nav-icon {
-  background: var(--lime);
-  border-color: var(--yellow);
-  transform: scale(1.15);
-}
-</style>
+    /* NAV */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      background: rgba(31,24,56,0.98);
+      border-top: 5px solid var(--lime);
+      display: flex;
+      padding: 12px 0 24px;
+    }
+    .nav-item { flex: 1; text-align: center; cursor: pointer; }
+    .nav-icon {
+      font-size: 28px;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto;
+      background: #2a1f4d;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid var(--pink);
+    }
+    .nav-item.active .nav-icon {
+      background: var(--lime);
+      border-color: var(--yellow);
+      transform: scale(1.15);
+    }
+  </style>
 </head>
 <body>
 
 <div class="app-shell">
-
-  <!-- HOME -->
+  <!-- HOME SCREEN -->
   <div class="screen active" id="screen-home">
     <div class="scroll-area">
       <div class="home-header">
@@ -184,11 +159,9 @@ body {
         <div class="home-title">Çfarë shërbimi<br>kërkon sot?</div>
       </div>
 
-      <div class="search-bar" onclick="switchScreen('search')">
-        🔎 Kërko hidraulik, shofer, pastrim...
-      </div>
+      <div class="search-bar" onclick="switchScreen('search')">🔎 Kërko hidraulik, shofer, pastrim...</div>
 
-      <div style="padding:10px 20px;">
+      <div style="padding:10px 20px 0;">
         <h3 style="color:var(--lime); font-size:20px;">Kategoritë 🔥</h3>
       </div>
       <div class="cat-scroll">
@@ -203,9 +176,9 @@ body {
         <h3 style="color:var(--lime); font-size:20px;">Të vlerësuarit 😂</h3>
       </div>
       <div class="featured-scroll">
-        <div class="feat-card" onclick="openProvider(0)"><div style="font-size:70px;">🧑‍🔧</div><h4>Artan</h4><p>8€/h</p></div>
-        <div class="feat-card" onclick="openProvider(1)"><div style="font-size:70px;">👩‍🌾</div><h4>Blerta</h4><p>6€/h</p></div>
-        <div class="feat-card" onclick="openProvider(2)"><div style="font-size:70px;">🚗</div><h4>Erion</h4><p>10€/h</p></div>
+        <div class="feat-card" onclick="openProvider(0)"><div style="font-size:60px">🧑‍🔧</div><h4>Artan</h4><p>8€/h</p></div>
+        <div class="feat-card" onclick="openProvider(1)"><div style="font-size:60px">👩‍🌾</div><h4>Blerta</h4><p>6€/h</p></div>
+        <div class="feat-card" onclick="openProvider(2)"><div style="font-size:60px">🚗</div><h4>Erion</h4><p>10€/h</p></div>
       </div>
 
       <div class="promo-card">
@@ -213,7 +186,7 @@ body {
           <h3>🚀 Bëhu Pro!</h3>
           <p>Fillo të fitosh para sot</p>
         </div>
-        <div style="font-size:70px;">💰</div>
+        <div style="font-size:70px">💰</div>
       </div>
     </div>
 
@@ -227,12 +200,11 @@ body {
 
   <!-- SEARCH SCREEN -->
   <div class="screen" id="screen-search">
-    <div class="scroll-area" style="padding:40px 20px; text-align:center;">
-      <h2 style="font-size:36px; margin-bottom:30px;">Gjej Ekspertin 😂</h2>
-      <input type="text" placeholder="Shkruaj çfarë të duhet..." style="width:100%; padding:20px; font-size:18px; border-radius:9999px; border:5px solid var(--lime); background:#2a1f4d;">
+    <div class="scroll-area" style="padding:50px 20px;text-align:center">
+      <h2 style="font-size:34px;margin-bottom:30px">Gjej Ekspertin 😂</h2>
+      <input type="text" placeholder="Shkruaj çfarë të duhet..." style="width:100%;padding:20px;font-size:18px;border-radius:9999px;border:5px solid var(--lime);background:#2a1f4d;color:white">
     </div>
   </div>
-
 </div>
 
 <script>
@@ -240,11 +212,9 @@ function switchScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
 }
-
 function openProvider(n) {
-  showToast("Duke hapur profilin e ekspertit " + (n+1) + " 😂");
+  showToast("Hapet profili i ekspertit " + (n+1) + " 😂");
 }
-
 function showToast(msg) {
   const t = document.createElement('div');
   t.style.cssText = `position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#2a1f4d;border:4px solid #c8ff4d;padding:16px 28px;border-radius:9999px;font-weight:800;z-index:9999;`;
@@ -252,9 +222,7 @@ function showToast(msg) {
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 2200);
 }
-
-console.log("%cShërbime App Loaded Successfully 😂", "color:#c8ff4d;font-size:20px;font-weight:bold");
+console.log("%cShërbime App Loaded - Ready for Publishing 😂", "color:#c8ff4d;font-size:18px");
 </script>
-
 </body>
 </html>
