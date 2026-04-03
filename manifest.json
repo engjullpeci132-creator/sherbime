@@ -8,14 +8,16 @@
   "theme_color": "#c8ff4d",
   "icons": [
     {
-      "src": "https://via.placeholder.com/192x192/ c8ff4d/120d24?text=🛠️",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "https://via.placeholder.com/512x512/c8ff4d/120d24?text=🛠️",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
