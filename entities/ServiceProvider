@@ -1,0 +1,100 @@
+{
+  "name": "ServiceProvider",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Full name of the service provider"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Profile photo URL"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "driver",
+        "gardener",
+        "plumber",
+        "electrician",
+        "cleaner",
+        "painter",
+        "carpenter",
+        "mechanic",
+        "tutor",
+        "chef",
+        "mover",
+        "handyman",
+        "photographer",
+        "pet_care",
+        "other"
+      ],
+      "description": "Service category"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short bio or description of services"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "description": "Hourly rate in dollars"
+    },
+    "city": {
+      "type": "string",
+      "description": "City where the provider operates"
+    },
+    "distance_km": {
+      "type": "number",
+      "description": "Simulated distance from user in km"
+    },
+    "rating": {
+      "type": "number",
+      "description": "Average rating (1-5)"
+    },
+    "total_reviews": {
+      "type": "number",
+      "description": "Total number of reviews"
+    },
+    "total_jobs": {
+      "type": "number",
+      "description": "Total completed jobs"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the provider has paid for featured listing"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the provider is verified (premium badge)"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Contact phone number"
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "available",
+        "busy",
+        "offline"
+      ],
+      "default": "available",
+      "description": "Current availability status"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of specific skills"
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "hourly_rate",
+    "city"
+  ]
+}
